@@ -1,2 +1,1 @@
-
-the repo where I'm learning go
+I'm using this repo to learn Go 
