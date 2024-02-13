@@ -14,7 +14,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up Go
-      uses: actions/setup-go@v4
+      uses: actions/setup-go@v5
       with:
         go-version: '1.22'
 
@@ -24,4 +24,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: built_go_binary
-        path: ./main
+        path: |
+          main
+          templates/
+          static/
