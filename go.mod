@@ -1,3 +1,3 @@
-module github.com/mitchfen/my_go_site
+module github.com/mitchfen/learning-go
 
 go 1.22
