@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"github.com/mitchfen/learning_go/pkg/outputHelpers"
 )
 
 func main() {
-	fmt.Println("Hello world")
+	outputHelpers.PrettyPrint("Hello kitty")
 }
