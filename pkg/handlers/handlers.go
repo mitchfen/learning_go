@@ -10,11 +10,11 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "index.tmpl")
+	render.RenderTemplate(w, "index.page.tmpl")
 }
 
 func About(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "about.tmpl")
+	render.RenderTemplate(w, "about.page.tmpl")
 }
 
 func StaticHandler(w http.ResponseWriter, r *http.Request) {

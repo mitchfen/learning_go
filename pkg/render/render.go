@@ -3,7 +3,9 @@ package render
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
+	"path/filepath"
 )
 
 // Cache is a map
@@ -15,6 +17,8 @@ func RenderTemplate(w http.ResponseWriter, templateName string) {
 	var templatePointer *template.Template
 
 	_, inCache := templateCache[templateName]
+
+	// If template is not in the cache, regenerate the cache
 	if !inCache {
 		err := createTemplateCache(templateName)
 		if err != nil {
@@ -31,11 +35,16 @@ func RenderTemplate(w http.ResponseWriter, templateName string) {
 
 // This is a local function and cannot be used outside this package
 func createTemplateCache(templateName string) error {
+	layoutTemplates, err := filepath.Glob("./templates/*.layout.tmpl")
+	if err != nil {
+		log.Println(err)
+	}
 	templates := []string{
 		fmt.Sprintf("./templates/%s", templateName),
-		"./templates/base.tmpl",
 	}
+	templates = append(templates, layoutTemplates...)
 
+	log.Println("Adding to cache:", templates)
 	// ... means take each entry from templates slice and put them in as strings
 	parsedTemplates, err := template.ParseFiles(templates...)
 	if err != nil {
