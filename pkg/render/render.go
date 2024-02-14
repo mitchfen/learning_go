@@ -18,15 +18,16 @@ func RenderTemplate(w http.ResponseWriter, templateName string) {
 
 	_, inCache := templateCache[templateName]
 
-	// If template is not in the cache, regenerate the cache
+	// If template is not in the cache, add it
 	if !inCache {
-		err := createTemplateCache(templateName)
+		err := updateTemplateCache(templateName)
 		if err != nil {
 			fmt.Println(err)
 		}
 	}
 
 	templatePointer = templateCache[templateName]
+	log.Println(templateCache)
 	err := templatePointer.Execute(w, nil)
 	if err != nil {
 		fmt.Println(err)
@@ -34,7 +35,7 @@ func RenderTemplate(w http.ResponseWriter, templateName string) {
 }
 
 // This is a local function and cannot be used outside this package
-func createTemplateCache(templateName string) error {
+func updateTemplateCache(templateName string) error {
 	layoutTemplates, err := filepath.Glob("./templates/*.layout.tmpl")
 	if err != nil {
 		log.Println(err)
@@ -44,8 +45,6 @@ func createTemplateCache(templateName string) error {
 	}
 	templates = append(templates, layoutTemplates...)
 
-	log.Println("Adding to cache:", templates)
-	// ... means take each entry from templates slice and put them in as strings
 	parsedTemplates, err := template.ParseFiles(templates...)
 	if err != nil {
 		return err

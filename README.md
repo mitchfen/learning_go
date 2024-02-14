@@ -1,4 +1,5 @@
-I'm using this repo to learn Go 
+I'm using this repo to learn Go.
+Following https://www.udemy.com/course/building-modern-web-applications-with-go
 
 ## Reminders
 Run site and watch for changes:  
