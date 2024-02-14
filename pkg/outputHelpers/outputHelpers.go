@@ -6,15 +6,17 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-
 func PrettyPrint(s string) {
-	var style = lipgloss.NewStyle().
-		Bold(true).
-		Foreground(lipgloss.Color("#44475a")).
+	var anotherStyle = lipgloss.NewStyle().
+		BorderStyle(lipgloss.RoundedBorder()).
 		Background(lipgloss.Color("#ff79c6")).
-		PaddingTop(0).
-		PaddingLeft(4).
-		Width(80)
+		Foreground(lipgloss.Color("#000000")).
+		BorderBackground(lipgloss.Color("#ff79c6")).
+		BorderForeground(lipgloss.Color("#000000")).
+		BorderRight(true).
+		BorderLeft(true).
+		BorderTop(true).
+		BorderBottom(true)
 
-	fmt.Println(style.Render("Hello, kitty"))
+	fmt.Println(anotherStyle.Render(s))
 }
